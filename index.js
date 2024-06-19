@@ -7,7 +7,9 @@ const Loader = ({
   color,
   size,
   opacity = 0.4,
-  title = ""
+  title = "",
+  titleStyle={},
+  contentBgStyle = {}
 }) => {
   return (
     <Modal
@@ -22,9 +24,9 @@ const Loader = ({
           { backgroundColor: `rgba(0,0,0,${opacity})` }
         ]}
       >
-        <View style={styles.activityIndicatorWrapper}>
+        <View style={{...styles.activityIndicatorWrapper, ...contentBgStyle}}>
           <ActivityIndicator animating={loading} color={color} size={size} />
-          <Text style={styles.title} numberOfLines={1}>
+          <Text style={{...styles.title,...titleStyle}} numberOfLines={1}>
             {title}
           </Text>
         </View>
@@ -42,7 +44,9 @@ Loader.propTypes = {
       return new Error("Opacity prop value out of range");
     }
   },
-  title: PropTypes.string
+  title: PropTypes.string,
+  titleStyle: PropTypes.object,
+  contentBgStyle: PropTypes.object
 };
 
 const styles = StyleSheet.create({
